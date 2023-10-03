@@ -1,0 +1,34 @@
+.item {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 8px;
+    width: min-content;
+    color: #000;
+
+    &__buttons{
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        gap: 4px;
+    }
+
+    &__field {
+        overflow: hidden;
+        white-space: nowrap;
+        max-width: 120px;
+        background-color: #fff;
+        padding: 4px 12px;
+        border-radius: 4px;
+        cursor: default;
+        text-overflow: ellipsis;
+    }
+
+    &__input {
+        width: 120px;
+        display: block;
+        background-color: transparent;
+        border: none;
+        outline: none;
+    }
+}

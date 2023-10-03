@@ -3,15 +3,15 @@ import "./Button.scss";
 
 type Props = {
   children: ReactNode;
-  isDangerous?: boolean;
+  variant?: "yellow" | "red" | "green";
   onClick?: () => void;
 };
 
-const Button: React.FC<Props> = ({ children, isDangerous, onClick }) => {
+const Button: React.FC<Props> = ({ children, variant, onClick }) => {
   return (
     <button
       onClick={onClick}
-      className={isDangerous ? "button button--dangerous" : "button"}
+      className={`${variant ? "button--" + variant : ""} button`}
     >
       {children}
     </button>

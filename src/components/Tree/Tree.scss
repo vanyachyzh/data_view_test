@@ -1,3 +1,6 @@
+
+@import './../../styles/variables.scss';
+
 .tree {
     padding-top: 10px;
     display: flex;
@@ -5,7 +8,7 @@
     gap: 86px;
 
     &--border {
-        border-top: 1px solid black;
+        border-top: 1px solid $gray-400;
     }
 
     &__item {
@@ -21,7 +24,7 @@
             left: 50%;
             height: 50px;
             width: 1px;
-            background-color: #000;
+            background-color: $gray-400;
         }
 
         &--left {
@@ -32,7 +35,7 @@
                 left: 0;
                 height: 15px;
                 width: 50%;
-                background-color: #e7e5e4;
+                background-color: $gray-200;
             }
         }
 
@@ -45,7 +48,7 @@
                 display: block;
                 height: 15px;
                 width: 50%;
-                background-color: #e7e5e4;
+                background-color: $gray-200;
             }
         }
 

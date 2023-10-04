@@ -1,6 +1,8 @@
+@import './../../styles/variables.scss';
+
 .button {
     display: flex;
-    background-color: #d6d3d1;
+    background-color: $gray-300;
     color: #fff;
     border: 0;
     padding: 2px;
@@ -9,31 +11,31 @@
     cursor: pointer;
 
     &:hover {
-        background-color: #a3a3a3;
+        background-color: $gray-400;
     }
 
     &--red {
-        background-color: #f87171;
+        background-color: $red-300;
 
         &:hover {
-            background-color: #ef4444;
+            background-color: $red-400;
         }
     }
 
     &--yellow {
-        background-color: #fde047;
+        background-color: $yellow-300;
 
         &:hover {
-            background-color: #facc15;
+            background-color: $yellow-400;
         }
     }
 
 
     &--green {
-        background-color: #86efac;
+        background-color: $green-300;
 
         &:hover {
-            background-color: #4ade80;
+            background-color: $green-400;
         }
     }
 }

@@ -6,6 +6,7 @@
     display: flex;
     justify-content: center;
     gap: 86px;
+    transition: all 0.3s;
 
     &--border {
         border-top: 1px solid $gray-400;
@@ -60,8 +61,7 @@
 
         &--main {
             &::before {
-                top: 0;
-                height: 40px;
+                height: 0;
             }
         }
     }

@@ -28,18 +28,7 @@ const Tree: React.FC<Props> = ({ items, updateNode }) => {
     );
   };
 
-  return (
-    <div className="container">
-      <div className="tree__item tree__item--main">
-        <Item
-          update={updateNode}
-          item={{ text: "Categories", edit: false, children: null, id: 555 }}
-        />
-      </div>
-
-      {renderTree(items)}
-    </div>
-  );
+  return <div className="container">{renderTree(items)}</div>;
 };
 
 export default Tree;

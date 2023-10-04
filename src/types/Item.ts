@@ -3,6 +3,7 @@ interface IItem {
   text: string;
   edit: boolean;
   children: null | IItem[];
+  editable?: boolean;
 }
 
 export default IItem;

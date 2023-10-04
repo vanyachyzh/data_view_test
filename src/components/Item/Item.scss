@@ -1,12 +1,17 @@
 .item {
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     gap: 8px;
-    width: min-content;
     color: #000;
+    max-width: fit-content;
+    position: relative;
+    z-index: 2;
+
 
     &__buttons{
+        position: absolute;
+        right: -66px;
         display: flex;
         justify-content: start;
         align-items: center;

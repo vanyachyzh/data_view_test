@@ -1,12 +1,46 @@
 import "./App.scss";
-import Button from "./components/Button/Button";
-import { PenIcon, PlusIcon, XIcon } from "./components/Icons";
-import Item from "./components/Item/Item";
+import Tree from "./components/Tree/Tree";
+import IItem from "./types/Item";
 
-const MOCK = [
+const MOCK: IItem[] = [
+  {
+    text: "Bu",
+    edit: false,
+    children: null,
+  },
   {
     text: "Hello",
     edit: false,
+    children: [
+      { text: "Bye", edit: false, children: null },
+      {
+        text: "Me",
+        edit: false,
+        children: [
+          { text: "Bye", edit: false, children: null },
+          { text: "Me", edit: false, children: null },
+          { text: "Bye", edit: false, children: null },
+        ],
+      },
+    ],
+  },
+
+  {
+    text: "No",
+    edit: false,
+    children: [{ text: "Yes", edit: false, children: null }],
+  },
+
+  {
+    text: "Bu",
+    edit: false,
+    children: null,
+  },
+
+  {
+    text: "Bu",
+    edit: false,
+    children: null,
   },
 ];
 
@@ -14,18 +48,7 @@ function App() {
   return (
     <>
       <div className="App">
-        <Button variant="red">
-          <XIcon />
-        </Button>
-
-        <Button variant="green">
-          <PenIcon />
-        </Button>
-        <Button variant="yellow">
-          <PlusIcon />
-        </Button>
-
-        <Item item={MOCK[0]} />
+        <Tree items={MOCK} />
       </div>
     </>
   );

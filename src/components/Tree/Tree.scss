@@ -1,0 +1,69 @@
+.tree {
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 86px;
+
+    &--border {
+        border-top: 1px solid black;
+    }
+
+    &__item {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+        position: relative;
+
+        &::before{
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            height: 50px;
+            width: 1px;
+            background-color: #000;
+        }
+
+        &--left {
+            &::after {
+                content: "";
+                position: absolute;
+                top: -15px;
+                left: 0;
+                height: 15px;
+                width: 50%;
+                background-color: #e7e5e4;
+            }
+        }
+
+        &--right {
+            &::after {
+                content: "";
+                position: absolute;
+                top: -15px;
+                right: -1px;
+                display: block;
+                height: 15px;
+                width: 50%;
+                background-color: #e7e5e4;
+            }
+        }
+
+        &--last {
+            &::before {
+                height: 29px;
+            }
+        }
+
+        &--main {
+            &::before {
+                top: 0;
+                height: 40px;
+            }
+        }
+    }
+}
+
+.container {
+    width: min-content;
+}

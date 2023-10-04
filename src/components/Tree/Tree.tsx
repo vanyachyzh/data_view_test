@@ -6,16 +6,17 @@ import "./Tree.scss";
 
 type Props = {
   items: IItem[];
+  updateNode: (targetNode: IItem, newNode?: IItem) => void;
 };
 
-const Tree: React.FC<Props> = ({ items }) => {
+const Tree: React.FC<Props> = ({ items, updateNode }) => {
   const renderTree = (items: IItem[]) => {
     return (
       <div className={`${addConnectionClass(items)} tree`}>
         {items.map((item, index) => (
-          <div key={item.text} className="tree__node">
+          <div key={item.id} className="tree__node">
             <div className={`tree__item ${addConnectionClass(items, index)}`}>
-              <Item item={item} />
+              <Item item={item} update={updateNode} />
             </div>
 
             {item.children &&
@@ -30,7 +31,10 @@ const Tree: React.FC<Props> = ({ items }) => {
   return (
     <div className="container">
       <div className="tree__item tree__item--main">
-        <Item item={{ text: "Categories", edit: false, children: null }} />
+        <Item
+          update={updateNode}
+          item={{ text: "Categories", edit: false, children: null, id: 555 }}
+        />
       </div>
 
       {renderTree(items)}

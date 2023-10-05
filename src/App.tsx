@@ -9,63 +9,69 @@ import { getUpdatedTree } from "./helpers/getUpdatedTree";
 import IItem from "./types/Item";
 import IPosition from "./types/Position";
 
-const obj = {
+const obj: IItem = {
   id: 12,
   text: "Bye",
-  edit: false,
+
   children: null,
-  editable: true,
+  type: "category",
 };
-const obj2 = {
+const obj2: IItem = {
   id: 13,
   text: "Bydddd",
-  edit: false,
+
   children: null,
-  editable: true,
+  type: "category",
 };
 
 const MOCK: IItem[] = [
   {
-    text: "Main",
-    edit: false,
+    text: "Categories",
+
     id: 2222,
-    editable: false,
+    type: "main",
     children: [
       obj2,
       {
         id: 14,
         text: "Bu",
-        edit: false,
+
         children: null,
-        editable: true,
+        type: "category",
       },
       {
         id: 15,
         text: "Hello",
-        edit: false,
-        editable: true,
+
+        type: "service",
         children: [
-          { id: 16, text: "Bye", edit: false, children: null, editable: true },
+          {
+            id: 16,
+            text: "Bye",
+
+            children: null,
+            type: "service",
+          },
           {
             id: 17,
             text: "Me",
-            edit: false,
-            editable: true,
+
+            type: "service",
             children: [
               obj,
               {
                 id: 18,
                 text: "Me",
-                edit: false,
+
                 children: null,
-                editable: true,
+                type: "category",
               },
               {
                 id: 19,
                 text: "Bye",
-                edit: false,
+
                 children: null,
-                editable: true,
+                type: "service",
               },
             ],
           },
@@ -75,16 +81,34 @@ const MOCK: IItem[] = [
       {
         id: 111,
         text: "No",
-        edit: false,
-        editable: true,
+
+        type: "service",
         children: [
-          { id: 122, text: "Yes", edit: false, children: null, editable: true },
+          {
+            id: 122,
+            text: "Yes",
+
+            children: null,
+            type: "category",
+          },
         ],
       },
 
-      { id: 133, text: "Bu", edit: false, children: null, editable: true },
+      {
+        id: 133,
+        text: "Bu",
 
-      { id: 144, text: "Bu", edit: false, children: null, editable: true },
+        children: null,
+        type: "category",
+      },
+
+      {
+        id: 144,
+        text: "Bu",
+
+        children: null,
+        type: "service",
+      },
     ],
   },
 ];
@@ -131,7 +155,6 @@ function App() {
         <div className="App__header">
           <h3>DATA VIEW</h3>
           <div className="App__actions">
-            <Button size="large">List view</Button>
             <Button size="large" onClick={() => setPosition(initialPosition)}>
               <CursorIcon />
             </Button>

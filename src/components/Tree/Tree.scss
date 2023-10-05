@@ -61,7 +61,8 @@
 
         &--main {
             &::before {
-                height: 0;
+                // top: 0;
+                // height: 42px;
             }
         }
     }

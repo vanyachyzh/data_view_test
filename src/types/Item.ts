@@ -1,9 +1,8 @@
 interface IItem {
   id: number;
   text: string;
-  edit: boolean;
   children: null | IItem[];
-  editable?: boolean;
+  type: "category" | "service" | "main";
 }
 
 export default IItem;

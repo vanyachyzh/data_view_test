@@ -1,20 +1,21 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import IItem from "../../types/Item";
 import Button from "../Button/Button";
-import { PenIcon, PlusIcon, PrevArrowIcon, XIcon } from "../Icons";
+import { CheckIcon, PenIcon, PlusIcon, XIcon } from "../Icons";
 import Modal from "../Modal/Modal";
 import "./Item.scss";
 
 type Props = {
   item: IItem;
   update: (targetNode: IItem, newNode?: IItem) => void;
+  variant?: "category" | "service" | "main";
 };
 
-const Item: React.FC<Props> = ({ item, update }) => {
-  const { edit, text, editable } = item;
+const Item: React.FC<Props> = ({ item, update, variant }) => {
+  const { text, type } = item;
   const [value, setValue] = useState(text);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const modalRef = useRef(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   const createItem = () => {
     update(item, {
@@ -26,18 +27,16 @@ const Item: React.FC<Props> = ({ item, update }) => {
               {
                 text: "",
                 id: 45656,
-                edit: true,
                 children: null,
-                editable: true,
+                type: "service",
               },
             ]
           : [
               {
                 text: "",
                 id: 45656,
-                edit: true,
                 children: null,
-                editable: true,
+                type: "service",
               },
             ],
     });
@@ -48,14 +47,14 @@ const Item: React.FC<Props> = ({ item, update }) => {
   return (
     <>
       <div className="item">
-        <div className="item__field">
-          {edit ? (
+        <div className={`${"item__field--" + variant} item__field`}>
+          {isEditing || !text ? (
             <input
-              onBlur={() =>
-                value
-                  ? update(item, { ...item, edit: false, text: value })
-                  : update(item)
-              }
+              onBlur={() => {
+                value ? update(item, { ...item, text: value }) : update(item);
+
+                setIsEditing(false);
+              }}
               autoFocus
               onFocus={() => console.log("focus")}
               className="item__input"
@@ -64,26 +63,24 @@ const Item: React.FC<Props> = ({ item, update }) => {
               onMouseDown={(e) => e.stopPropagation()}
             />
           ) : (
-            <span>{text}</span>
+            text
           )}
         </div>
 
         <div className="item__buttons" onMouseDown={(e) => e.stopPropagation()}>
-          {edit ? (
+          {isEditing || !text ? (
             <>
-              <Button
-                variant="yellow"
-                onClick={() => update(item, { ...item, edit: false })}
-              >
+              <Button variant="yellow" onClick={() => setIsEditing(false)}>
                 <XIcon />
               </Button>
               <Button
                 variant="green"
-                onClick={() =>
-                  update(item, { ...item, edit: false, text: value })
-                }
+                onClick={() => {
+                  update(item, { ...item, text: value });
+                  setIsEditing(false);
+                }}
               >
-                <PrevArrowIcon />
+                <CheckIcon />
               </Button>
             </>
           ) : (
@@ -91,9 +88,9 @@ const Item: React.FC<Props> = ({ item, update }) => {
               <Button onClick={() => setIsModalOpen(true)}>
                 <PlusIcon />
               </Button>
-              {editable && (
+              {type !== "main" && (
                 <>
-                  <Button onClick={() => update(item, { ...item, edit: true })}>
+                  <Button onClick={() => setIsEditing(true)}>
                     <PenIcon />
                   </Button>
                   <Button variant="red" onClick={() => update(item)}>

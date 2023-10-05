@@ -15,8 +15,12 @@ const Tree: React.FC<Props> = ({ items, updateNode }) => {
       <div className={`${addConnectionClass(items)} tree`}>
         {items.map((item, index) => (
           <div key={item.id} className="tree__node">
-            <div className={`tree__item ${addConnectionClass(items, index)}`}>
-              <Item item={item} update={updateNode} />
+            <div
+              className={`tree__item ${addConnectionClass(items, index)} ${
+                item.type === "main" ? "tree__item--main" : ""
+              }`}
+            >
+              <Item item={item} update={updateNode} variant={item.type} />
             </div>
 
             {item.children &&

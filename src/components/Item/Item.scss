@@ -1,3 +1,5 @@
+@import './../../styles/variables.scss';
+
 .item {
     display: flex;
     justify-content: center;
@@ -26,6 +28,22 @@
         border-radius: 2px;
         cursor: default;
         text-overflow: ellipsis;
+        color: #fff;
+        user-select: none;
+
+
+        &--category {
+            background-color: $sky-300;
+        }
+
+        &--service {
+            background-color: $orange-300;
+        }
+
+        &--main {
+            border: 1px dashed $gray-200;
+            color: #000;
+        }
     }
 
     &__input {
@@ -35,6 +53,7 @@
         background-color: transparent;
         border: none;
         outline: none;
+        background-color: #fff;
     }
     
     &__modal {

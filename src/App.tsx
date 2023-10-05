@@ -138,6 +138,7 @@ function App() {
             <Selector position={position} setPosition={setPosition} />
           </div>
         </div>
+
         <div className="App__body" ref={appBodyRef}>
           <MultiDirectionalContainer
             position={position}

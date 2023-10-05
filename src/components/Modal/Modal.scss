@@ -1,10 +1,18 @@
+@import './../../styles/variables.scss';
+
 .modal {
     background-color: #fff;
     width: fit-content;
     padding: 20px 30px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
+    box-shadow: $shadow;
+    border-radius: 2px;
+
+    &__body {
+        font-weight: 600;
+    }
 
     &__footer {
         display: flex;

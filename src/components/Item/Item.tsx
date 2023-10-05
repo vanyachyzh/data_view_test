@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
-import Modal from "../../Modal/Modal";
 import IItem from "../../types/Item";
 import Button from "../Button/Button";
 import { PenIcon, PlusIcon, PrevArrowIcon, XIcon } from "../Icons";
+import Modal from "../Modal/Modal";
 import "./Item.scss";
 
 type Props = {
@@ -105,24 +105,23 @@ const Item: React.FC<Props> = ({ item, update }) => {
           )}
         </div>
 
-        {isModalOpen && (
-          <div
-            className="item__modal"
-            ref={modalRef}
-            onMouseDown={(e) => e.stopPropagation()}
+        <div className="item__modal" onMouseDown={(e) => e.stopPropagation()}>
+          <Modal
+            open={isModalOpen}
+            footer={
+              <>
+                <Button size="large" onClick={createItem}>
+                  Category
+                </Button>
+                <Button size="large" onClick={createItem}>
+                  Service
+                </Button>
+              </>
+            }
           >
-            <Modal
-              footer={
-                <>
-                  <button onClick={createItem}>Category</button>
-                  <button onClick={createItem}>Type</button>
-                </>
-              }
-            >
-              What do you want to create?
-            </Modal>
-          </div>
-        )}
+            What do you want to create?
+          </Modal>
+        </div>
       </div>
     </>
   );

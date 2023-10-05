@@ -6,7 +6,6 @@
     color: #000;
     max-width: fit-content;
     position: relative;
-    z-index: 2;
 
 
     &__buttons{
@@ -42,5 +41,6 @@
         position: absolute;
         top: calc(100% + 15px);
         left: 0;
+        z-index: 5;
     }
 }

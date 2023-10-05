@@ -5,13 +5,16 @@ type Props = {
   children: ReactNode;
   variant?: "yellow" | "red" | "green";
   onClick?: () => void;
+  size?: "small" | "large";
 };
 
-const Button: React.FC<Props> = ({ children, variant, onClick }) => {
+const Button: React.FC<Props> = ({ children, variant, onClick, size }) => {
   return (
     <button
       onClick={onClick}
-      className={`${variant ? "button--" + variant : ""} button`}
+      className={`${variant ? "button--" + variant : ""} ${
+        size ? "button--" + size : ""
+      } button`}
     >
       {children}
     </button>

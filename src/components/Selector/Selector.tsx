@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { useOutsideClick } from "../../hooks/hooks";
 import IPosition from "../../types/Position";
+import Button from "../Button/Button";
 import "./Selector.scss";
 
 type Props = {
@@ -10,6 +12,11 @@ type Props = {
 const Selector: React.FC<Props> = ({ position, setPosition }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState(50);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useOutsideClick(dropdownRef, () => {
+    setIsOpen(false);
+  });
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -28,11 +35,7 @@ const Selector: React.FC<Props> = ({ position, setPosition }) => {
     const options = [];
     for (let i = 25; i <= 150; i += 25) {
       options.push(
-        <div
-          key={i}
-          onClick={() => handleOptionClick(i)}
-          className="dropdown-option"
-        >
+        <div key={i} onClick={() => handleOptionClick(i)}>
           {i}%
         </div>
       );
@@ -42,8 +45,8 @@ const Selector: React.FC<Props> = ({ position, setPosition }) => {
 
   return (
     <div className="selector">
-      <button
-        className="selector__minus"
+      <Button
+        size="large"
         onClick={() =>
           setPosition((prev) => ({
             ...prev,
@@ -52,15 +55,19 @@ const Selector: React.FC<Props> = ({ position, setPosition }) => {
         }
       >
         -
-      </button>
-      <div className="selector__dropdown" onClick={toggleDropdown}>
+      </Button>
+      <div
+        className="selector__dropdown"
+        onClick={toggleDropdown}
+        ref={dropdownRef}
+      >
         {position.z}%
         {isOpen && (
           <div className="selector__options">{renderDropdownOptions()}</div>
         )}
       </div>
-      <button
-        className="selector__plus"
+      <Button
+        size="large"
         onClick={() =>
           setPosition((prev) => ({
             ...prev,
@@ -69,7 +76,7 @@ const Selector: React.FC<Props> = ({ position, setPosition }) => {
         }
       >
         +
-      </button>
+      </Button>
     </div>
   );
 };

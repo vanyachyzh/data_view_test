@@ -1,0 +1,57 @@
+@import './../../styles/variables.scss';
+
+.multi-container {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+  
+    &__children {
+      position: absolute;
+    }
+
+    &__button {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $gray-300;
+      border: none;
+      outline: none;
+      padding: 0;
+      color: #fff;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $gray-400;
+      }
+
+      &--next {
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 100px;
+      }
+    
+      &--prev{
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 100px;
+      }
+    
+      &--down{
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        width: 100px;
+      }
+    
+      &--up{
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        width: 100px;
+      }
+    }
+  }
+  

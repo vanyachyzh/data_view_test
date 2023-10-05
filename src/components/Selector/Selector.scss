@@ -1,5 +1,33 @@
+@import './../../styles/variables.scss';
+
 .selector {
-    background-color: red;
     width: min-content;
     display: flex;
+    gap: 2px;
+    position: relative;
+    cursor: pointer;
+
+
+    &__dropdown {
+        min-width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid $gray-300;
+        background: #fff;
+    }
+
+    &__options {
+        position: absolute;
+        top: 35px;
+        left: 0;
+        background-color: #fff;
+        width: 100%;
+        
+
+        & > div:hover {
+            background-color: $gray-300;
+            box-shadow: $shadow;
+        }
+    }
 }

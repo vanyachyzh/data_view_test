@@ -1,57 +1,30 @@
-
+@import './styles/variables.scss';
 .App {
   text-align: center;
-  background-color: #61dafb;
 
   &__header {
-    background-color: aquamarine;
-    height: 10vh;
+    height: 5vh;
     position: relative;
     z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    border-bottom:  1px solid $gray-300;
+    padding: 0 40px;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
   }
 
   &__body {
-    background-color: greenyellow;
     position: relative;
-    height: 90vh;
+    height: 95vh;
   }
 }
 
-.multi-container {
-  background-color: yellow;
-  position: relative;
-  height: 100%;
-
-  &__children {
-    position: absolute;
-  }
-
-  &__right {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  &__left{
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  &__bottom{
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-  }
-
-  &__top{
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
-  }
-}
 

@@ -1,5 +1,8 @@
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.scss";
+import Button from "./components/Button/Button";
+import { CursorIcon } from "./components/Icons";
+import MultiDirectionalContainer from "./components/MultiDirectionalContainer/MultiDirectionalContainer";
 import Selector from "./components/Selector/Selector";
 import Tree from "./components/Tree/Tree";
 import { getUpdatedTree } from "./helpers/getUpdatedTree";
@@ -86,27 +89,34 @@ const MOCK: IItem[] = [
   },
 ];
 
-type Props = {
-  children: ReactNode;
-  position: IPosition;
-  setPosition: (position: React.SetStateAction<IPosition>) => void;
-};
+function App() {
+  const [items, setItems] = useState<IItem[]>(MOCK);
+  const [initialPosition, setInitialPosition] = useState<IPosition>({
+    x: 0,
+    y: 0,
+    z: 100,
+  });
+  const [position, setPosition] = useState<IPosition>({
+    x: 0,
+    y: 0,
+    z: 100,
+  });
+  const appBodyRef = useRef<HTMLDivElement>(null);
 
-const MultiDirectionalContainer: React.FC<Props> = ({
-  position,
-  setPosition,
-  children,
-}) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const moveChildren = (x: number, y: number) => {
-    setPosition((prev) => ({ ...prev, x, y }));
+  const updateNode = (targetNode: IItem, newNode?: IItem) => {
+    setItems(getUpdatedTree(items, targetNode, newNode));
   };
 
   useEffect(() => {
-    if (containerRef.current) {
-      const containerWidth = containerRef.current.offsetWidth;
-      const containerHeight = containerRef.current.offsetHeight;
+    if (appBodyRef.current) {
+      const containerWidth = appBodyRef.current.offsetWidth;
+      const containerHeight = appBodyRef.current.offsetHeight;
+      setInitialPosition((prev) => ({
+        ...prev,
+        x: containerWidth / 2,
+        y: containerHeight / 2,
+      }));
+
       setPosition((prev) => ({
         ...prev,
         x: containerWidth / 2,
@@ -116,63 +126,19 @@ const MultiDirectionalContainer: React.FC<Props> = ({
   }, []);
 
   return (
-    <div className="multi-container" ref={containerRef}>
-      <div
-        className="multi-container__children"
-        style={{
-          top: position.y,
-          left: position.x,
-          transform: `scale(${position.z}%) translate(-50%, -50%)`,
-        }}
-      >
-        {children}
-      </div>
-      <button
-        className="multi-container__left"
-        onClick={() => moveChildren(position.x - 10, position.y)}
-      >
-        Left
-      </button>
-      <button
-        className="multi-container__right"
-        onClick={() => moveChildren(position.x + 10, position.y)}
-      >
-        Right
-      </button>
-      <button
-        className="multi-container__top"
-        onClick={() => moveChildren(position.x, position.y - 10)}
-      >
-        Top
-      </button>
-      <button
-        className="multi-container__bottom"
-        onClick={() => moveChildren(position.x, position.y + 10)}
-      >
-        Bottom
-      </button>
-    </div>
-  );
-};
-function App() {
-  const [items, setItems] = useState<IItem[]>(MOCK);
-  const [position, setPosition] = useState({ x: 0, y: 0, z: 100 });
-
-  const updateNode = (targetNode: IItem, newNode?: IItem) => {
-    setItems(getUpdatedTree(items, targetNode, newNode));
-  };
-
-  useEffect(() => {
-    console.log(items);
-  }, [items]);
-
-  return (
     <>
       <div className="App">
         <div className="App__header">
-          Header <Selector position={position} setPosition={setPosition} />
+          <h3>DATA VIEW</h3>
+          <div className="App__actions">
+            <Button size="large">List view</Button>
+            <Button size="large" onClick={() => setPosition(initialPosition)}>
+              <CursorIcon />
+            </Button>
+            <Selector position={position} setPosition={setPosition} />
+          </div>
         </div>
-        <div className="App__body">
+        <div className="App__body" ref={appBodyRef}>
           <MultiDirectionalContainer
             position={position}
             setPosition={setPosition}

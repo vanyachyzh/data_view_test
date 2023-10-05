@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import Modal from "../../Modal/Modal";
 import IItem from "../../types/Item";
 import Button from "../Button/Button";
-import { CheckIcon, PenIcon, PlusIcon, XIcon } from "../Icons";
+import { PenIcon, PlusIcon, PrevArrowIcon, XIcon } from "../Icons";
 import "./Item.scss";
 
 type Props = {
@@ -61,13 +61,14 @@ const Item: React.FC<Props> = ({ item, update }) => {
               className="item__input"
               value={value}
               onChange={(event) => setValue(event.target.value)}
+              onMouseDown={(e) => e.stopPropagation()}
             />
           ) : (
             <span>{text}</span>
           )}
         </div>
 
-        <div className="item__buttons">
+        <div className="item__buttons" onMouseDown={(e) => e.stopPropagation()}>
           {edit ? (
             <>
               <Button
@@ -82,7 +83,7 @@ const Item: React.FC<Props> = ({ item, update }) => {
                   update(item, { ...item, edit: false, text: value })
                 }
               >
-                <CheckIcon />
+                <PrevArrowIcon />
               </Button>
             </>
           ) : (
@@ -105,7 +106,11 @@ const Item: React.FC<Props> = ({ item, update }) => {
         </div>
 
         {isModalOpen && (
-          <div className="item__modal" ref={modalRef}>
+          <div
+            className="item__modal"
+            ref={modalRef}
+            onMouseDown={(e) => e.stopPropagation()}
+          >
             <Modal
               footer={
                 <>
